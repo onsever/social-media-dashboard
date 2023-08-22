@@ -38,7 +38,7 @@ export default function HomePage() {
         </div>
       </div>
       {/* Add New Post */}
-      <div className="p-4 border-b border-b-gray-300">
+      <div className="p-4 pb-2 border-b border-b-gray-300">
         <div className="flex space-x-3">
           <UserAvatarCircle user={user} />
           <textarea
