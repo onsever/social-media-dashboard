@@ -37,7 +37,7 @@ const postSlice = createSlice({
 
       if (postsJSON) {
         const posts = JSON.parse(postsJSON);
-        state.pop();
+        state.splice(0);
         state.push(...posts);
       }
     },
