@@ -21,7 +21,10 @@ export default function Header() {
       <nav className="flex items-center justify-start my-6 space-x-4">
         <ul className="flex flex-col items-start justify-start space-y-8">
           {navLinks.map((link) => (
-            <li className="flex items-center justify-center space-x-3 hover:bg-gray-200 rounded-full cursor-pointer">
+            <li
+              key={link.title}
+              className="flex items-center justify-center space-x-3 hover:bg-gray-200 rounded-full cursor-pointer"
+            >
               {link.icon}
               <span className={`text-lg ${link.active && "font-bold"}`}>
                 {link.title}
@@ -32,8 +35,8 @@ export default function Header() {
       </nav>
       <Button text={"Post"} primary={true} />
       <div className="absolute bottom-5 right-0 left-0 flex space-x-3 items-center justify-between">
-        <div className="flex items-center space-x-3">
-          <div className="flex items-center justify-center p-6 bg-primary w-12 h-12 rounded-full">
+        <div className="flex items-center space-x-3 text-sm">
+          <div className="flex items-center justify-center p-6 bg-primary w-10 h-10 rounded-full">
             <span className="font-bold text-white">
               {user.fullName.split(" ")[0][0]}
             </span>

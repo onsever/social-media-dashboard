@@ -12,7 +12,7 @@ export default function Layout({ children }: LayoutProps) {
   }, []);
 
   return (
-    <div className="grid grid-cols-[1.2fr,3fr,1.2fr] gap-4 w-[1240px] h-screen m-auto">
+    <div className="grid grid-cols-[1.5fr,3fr,1.5fr] gap-4 w-[1240px] h-screen m-auto">
       <Header />
       <main className="border border-gray-300 border-t-0">{children}</main>
       <Sidebar />
