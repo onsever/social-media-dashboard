@@ -18,7 +18,7 @@ export default function HomePage() {
 
   return (
     <>
-      <div className="pt-4 border-b border-b-gray-300">
+      <div className="pt-4 border-b border-b-gray-100">
         <h1 className="text-xl font-bold px-4">Home</h1>
         <div className="flex justify-around mt-4">
           <span className="font-bold text-sm cursor-pointer hover:bg-gray-200 w-full p-4 text-center underline decoration-primary underline-offset-[17px] decoration-4">

@@ -48,7 +48,7 @@ export default function AddNewPost({ user, onSubmit }: AddNewPostProps) {
   }, [textAreaValue]);
 
   return (
-    <div className="p-4 pb-2 border-b border-b-gray-300">
+    <div className="p-4 pb-2 border-b border-b-gray-100">
       <div className="flex space-x-3">
         <UserAvatarCircle user={user} />
         <textarea
