@@ -5,6 +5,10 @@ export interface PostState {
   id: string | number;
   content: string;
   user: UserState | null;
+  likes: number;
+  comments: number;
+  shares: number;
+  stats: number;
 }
 
 const initialState: PostState[] = [];
@@ -33,6 +37,7 @@ const postSlice = createSlice({
 
       if (postsJSON) {
         const posts = JSON.parse(postsJSON);
+        state.pop();
         state.push(...posts);
       }
     },
