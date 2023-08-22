@@ -1,4 +1,4 @@
-type WhatsHappeningItem = {
+export type WhatsHappeningItem = {
   title: string;
   subtitle: string;
   posts: string;

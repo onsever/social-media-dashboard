@@ -1,4 +1,4 @@
-type WhoToFollowItem = {
+export type WhoToFollowItem = {
   id: number;
   name: string;
   username: string;
