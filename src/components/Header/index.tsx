@@ -6,6 +6,7 @@ import { getUser } from "../../redux/features/user/userSlice.ts";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store.ts";
 import React from "react";
+import UserAvatarCircle from "../UserAvatarCircle";
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -36,11 +37,7 @@ export default function Header() {
       <Button text={"Post"} primary={true} />
       <div className="absolute bottom-6 right-0 left-0 flex space-x-3 items-center justify-between">
         <div className="flex items-center space-x-3 text-sm">
-          <div className="flex items-center justify-center p-5 bg-primary w-10 h-10 rounded-full">
-            <span className="font-bold text-white">
-              {user.fullName.split(" ")[0][0]}
-            </span>
-          </div>
+          <UserAvatarCircle user={user} />
           <div>
             <p className="font-bold">{user.fullName}</p>
             <p className="text-gray-600">@{user.username}</p>
