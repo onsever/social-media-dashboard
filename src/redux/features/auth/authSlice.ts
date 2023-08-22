@@ -5,7 +5,9 @@ export type AuthProps = {
 };
 
 const initialState: AuthProps = {
-  isAuthenticated: false,
+  isAuthenticated: JSON.parse(
+    localStorage.getItem("isAuthenticated") || "false"
+  ),
 };
 
 const authSlice = createSlice({
@@ -14,6 +16,11 @@ const authSlice = createSlice({
   reducers: {
     setAuthenticated(state, action: PayloadAction<boolean>) {
       state.isAuthenticated = action.payload;
+
+      localStorage.setItem(
+        "isAuthenticated",
+        JSON.stringify(state.isAuthenticated)
+      );
     },
   },
 });

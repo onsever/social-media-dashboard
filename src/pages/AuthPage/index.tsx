@@ -1,7 +1,14 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setAuthenticated } from "../../redux/features/auth/authSlice.ts";
+import { createOrUpdateUser } from "../../redux/features/user/userSlice.ts";
 import { Button, Input, Logo } from "../../components";
 
 export default function AuthPage() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [isLogin, setIsLogin] = React.useState<boolean>(false);
   const [fullName, setFullName] = React.useState<string>("");
   const [username, setUsername] = React.useState<string>("");
@@ -13,7 +20,24 @@ export default function AuthPage() {
     e.preventDefault();
 
     if (isLogin) {
-      console.log("Login");
+      dispatch(setAuthenticated(true));
+      navigate("/home");
+    }
+
+    if (!isLogin) {
+      dispatch(
+        createOrUpdateUser({
+          id: Math.floor(Math.random() * 1000),
+          fullName,
+          username,
+          email,
+          password,
+        })
+      );
+
+      dispatch(setAuthenticated(true));
+
+      setIsLogin((prevState) => !prevState);
     }
   };
 
