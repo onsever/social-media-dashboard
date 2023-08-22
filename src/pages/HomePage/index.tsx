@@ -1,16 +1,43 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../../redux/features/user/userSlice.ts";
+import {
+  getPosts,
+  createOrUpdatePost,
+} from "../../redux/features/post/postSlice.ts";
 import icons from "./iconList.tsx";
 import { RootState } from "../../redux/store.ts";
 import { UserAvatarCircle } from "../../components";
+import PostItem from "../../components/PostItem";
 
 export default function HomePage() {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user);
+  const posts = useSelector((state: RootState) => state.post);
 
   const [textAreaValue, setTextAreaValue] = React.useState<string>("");
   const [isTextAreaEmpty, setIsTextAreaEmpty] = React.useState<boolean>(true);
+
+  const generateRandomNumberBetween = (min: number, max: number) => {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(
+      createOrUpdatePost({
+        id: Math.floor(Math.random() * 1000),
+        user: user,
+        content: textAreaValue,
+        likes: generateRandomNumberBetween(0, 100),
+        comments: generateRandomNumberBetween(0, 100),
+        shares: generateRandomNumberBetween(0, 100),
+        stats: generateRandomNumberBetween(10000, 40000),
+      })
+    );
+
+    setTextAreaValue("");
+  };
 
   React.useEffect(() => {
     if (textAreaValue.length > 0) {
@@ -22,6 +49,7 @@ export default function HomePage() {
 
   React.useEffect(() => {
     dispatch(getUser());
+    dispatch(getPosts());
   }, [dispatch]);
 
   return (
@@ -49,7 +77,10 @@ export default function HomePage() {
           />
         </div>
         {/* Icons */}
-        <div className="flex justify-between items-center mt-4 pl-10">
+        <form
+          className="flex justify-between items-center mt-4 pl-10"
+          onSubmit={handleSubmit}
+        >
           <div className="flex text-primary">
             <div className="flex">
               {icons.map((icon) => (
@@ -63,13 +94,19 @@ export default function HomePage() {
             </div>
           </div>
           <button
+            type="submit"
             className="bg-primary text-white px-4 py-2 rounded-full font-bold text-sm hover:bg-[#1a8cd8] cursor-pointer disabled:bg-[#99CDF8] disabled:cursor-not-allowed"
             disabled={isTextAreaEmpty}
           >
             Post
           </button>
-        </div>
+        </form>
       </div>
+      {/* Posts */}
+      {posts &&
+        posts.length > 0 &&
+        user &&
+        posts.map((post) => <PostItem post={post} user={user} key={post.id} />)}
     </>
   );
 }
