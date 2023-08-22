@@ -39,7 +39,7 @@ export default function Header() {
             {navLinks.map((link) => (
               <li
                 key={link.title}
-                className="flex items-center justify-center space-x-3 hover:bg-gray-200 rounded-full cursor-pointer"
+                className="flex items-center justify-center space-x-5 hover:bg-gray-200 rounded-full cursor-pointer"
               >
                 {link.icon}
                 <span className={`text-lg ${link.active && "font-bold"}`}>
