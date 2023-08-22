@@ -5,7 +5,7 @@ interface LogoProps {
 
 export default function Logo({ width, height }: LogoProps) {
   return (
-    <div className={`w-${width} h-${height}`}>
+    <div className={`w-${width} h-${height} cursor-pointer`}>
       <svg
         viewBox="0 0 24 24"
         aria-hidden="true"

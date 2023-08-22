@@ -34,9 +34,9 @@ export default function Header() {
         </ul>
       </nav>
       <Button text={"Post"} primary={true} />
-      <div className="absolute bottom-5 right-0 left-0 flex space-x-3 items-center justify-between">
+      <div className="absolute bottom-6 right-0 left-0 flex space-x-3 items-center justify-between">
         <div className="flex items-center space-x-3 text-sm">
-          <div className="flex items-center justify-center p-6 bg-primary w-10 h-10 rounded-full">
+          <div className="flex items-center justify-center p-5 bg-primary w-10 h-10 rounded-full">
             <span className="font-bold text-white">
               {user.fullName.split(" ")[0][0]}
             </span>
@@ -47,7 +47,7 @@ export default function Header() {
           </div>
         </div>
         <div>
-          <RiMoreLine className="w-6 h-6 cursor-pointer" />
+          <RiMoreLine className="w-5 h-5 cursor-pointer" />
         </div>
       </div>
     </header>
