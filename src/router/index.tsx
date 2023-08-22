@@ -1,10 +1,15 @@
 import { createBrowserRouter, RouteObject } from "react-router-dom";
 import HomePage from "../pages/HomePage";
+import AuthPage from "../pages/AuthPage";
 
 const routes: RouteObject[] = [
   {
-    path: "/",
+    path: "/home",
     element: <HomePage />,
+  },
+  {
+    path: "/",
+    element: <AuthPage />,
   },
 ];
 
