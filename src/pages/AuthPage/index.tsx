@@ -15,16 +15,34 @@ export default function AuthPage() {
   const [email, setEmail] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
   const [confirmPassword, setConfirmPassword] = React.useState<string>("");
+  const [errorMessage, setErrorMessage] = React.useState<string>("");
 
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (isLogin) {
-      dispatch(setAuthenticated(true));
-      navigate("/home");
+      const storedUser = JSON.parse(localStorage.getItem("user") || "{}");
+
+      if (storedUser.email === email && storedUser.password === password) {
+        setErrorMessage("");
+        dispatch(setAuthenticated(true));
+        navigate("/home");
+      } else {
+        setErrorMessage("Invalid email or password");
+      }
     }
 
     if (!isLogin) {
+      if (!fullName || !username || !email || !password || !confirmPassword) {
+        setErrorMessage("Please fill all fields");
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        setErrorMessage("Password and Confirm Password must be the same");
+        return;
+      }
+
       dispatch(
         createOrUpdateUser({
           id: Math.floor(Math.random() * 1000),
@@ -36,7 +54,7 @@ export default function AuthPage() {
       );
 
       dispatch(setAuthenticated(true));
-
+      setErrorMessage("");
       setIsLogin((prevState) => !prevState);
     }
   };
@@ -59,6 +77,11 @@ export default function AuthPage() {
           {!isLogin ? (
             <form onSubmit={handleLogin}>
               <h1 className="text-[4rem] font-bold">Join today.</h1>
+              {errorMessage && (
+                <span className="text-red-500 text-xs leading-none block mt-2">
+                  {errorMessage}
+                </span>
+              )}
               <Input
                 type="text"
                 placeholder="Full Name"
@@ -105,6 +128,11 @@ export default function AuthPage() {
           ) : (
             <form onSubmit={handleLogin}>
               <h1 className="text-[4rem] font-bold">Let's go.</h1>
+              {errorMessage && (
+                <span className="text-red-500 text-xs leading-none block my-2">
+                  {errorMessage}
+                </span>
+              )}
               <Input
                 type="email"
                 placeholder="Email"
