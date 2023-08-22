@@ -1,3 +1,4 @@
+import React from "react";
 import Logo from "../Logo";
 import { RiMoreLine } from "react-icons/ri";
 import Button from "../Button";
@@ -5,12 +6,19 @@ import navLinks from "./navLinks.tsx";
 import { getUser } from "../../redux/features/user/userSlice.ts";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store.ts";
-import React from "react";
 import UserAvatarCircle from "../UserAvatarCircle";
+import { setAuthenticated } from "../../redux/features/auth/authSlice.ts";
 
 export default function Header() {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user);
+
+  const [isMoreIconClicked, setIsMoreIconClicked] =
+    React.useState<boolean>(false);
+
+  const handleLogout = () => {
+    dispatch(setAuthenticated(false));
+  };
 
   React.useEffect(() => {
     dispatch(getUser());
@@ -43,8 +51,23 @@ export default function Header() {
             <p className="text-gray-600">@{user.username}</p>
           </div>
         </div>
-        <div>
+        <div
+          className="flex items-center relative"
+          onClick={() => setIsMoreIconClicked((prevState) => !prevState)}
+        >
           <RiMoreLine className="w-5 h-5 cursor-pointer" />
+          {isMoreIconClicked && (
+            <div className="absolute right-0 -top-10 bg-white shadow-lg rounded-lg w-32">
+              <ul className="flex flex-col">
+                <li
+                  className="px-4 py-2 hover:bg-gray-200 cursor-pointer"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </header>
