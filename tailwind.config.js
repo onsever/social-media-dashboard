@@ -3,7 +3,7 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   safelist: [
     {
-      pattern: /^w-(96|52)$/,
+      pattern: /^w-(96|52|8)$/,
     },
   ],
   theme: {
