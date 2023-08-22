@@ -33,16 +33,24 @@ export default function PostItem({ post, user }: PostItemProps) {
     }
   };
 
+  const handleSubmit = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    e.preventDefault();
+    setIsEditMode((prevState) => !prevState);
+  };
+
   const handleDeletePost = (id: number | string) => {
     dispatch(deletePost(id));
   };
 
-  const handleEditPost = (id: number | string) => {
+  const handleEditPost = (
+    e: React.ChangeEvent<HTMLTextAreaElement>,
+    id: number | string
+  ) => {
     dispatch(
       createOrUpdatePost({
         id: id,
         user: user,
-        content: "edited content",
+        content: e.target.value,
         likes: post.likes,
         stats: post.stats,
         comments: post.comments,
@@ -52,11 +60,11 @@ export default function PostItem({ post, user }: PostItemProps) {
   };
 
   return (
-    <div className="mt-4 px-4 flex border-b border-b-gray-300 pb-4">
+    <div className="px-4 pt-4 flex border-b border-b-gray-300 pb-4 hover:bg-gray-100 cursor-pointer">
       <div>
         <UserAvatarCircle user={user} />
       </div>
-      <div>
+      <div className="w-full">
         <div className="ml-4">
           <div className="flex justify-between">
             <div className="flex items-center">
@@ -75,7 +83,7 @@ export default function PostItem({ post, user }: PostItemProps) {
                   <ul className="flex flex-col">
                     <li
                       className="px-4 py-2 hover:bg-gray-200 cursor-pointer"
-                      onClick={() => handleEditPost(post.id)}
+                      onClick={() => setIsEditMode((prevState) => !prevState)}
                     >
                       Edit
                     </li>
@@ -91,7 +99,22 @@ export default function PostItem({ post, user }: PostItemProps) {
             </div>
           </div>
           <div className="mt-1">
-            <p>{post.content}</p>
+            {isEditMode ? (
+              <form>
+                <textarea
+                  className="w-full h-32 p-2 rounded-lg border-none focus:outline-none text-xl resize-none"
+                  value={post.content}
+                  onChange={(e) => handleEditPost(e, post.id)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                      handleSubmit(e);
+                    }
+                  }}
+                />
+              </form>
+            ) : (
+              <p>{post.content}</p>
+            )}
           </div>
         </div>
         {/* Icons Container */}
