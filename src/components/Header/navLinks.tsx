@@ -12,27 +12,27 @@ interface NavLink {
 const navLinks: NavLink[] = [
   {
     title: "Home",
-    icon: <RiHome7Fill className="w-8 h-8" />,
+    icon: <RiHome7Fill className="w-7 h-7" />,
     active: true,
   },
   {
     title: "Explore",
-    icon: <RiSearchLine className="w-7 h-7" />,
+    icon: <RiSearchLine className="w-6 h-6" />,
     active: false,
   },
   {
     title: "Notifications",
-    icon: <GrNotification className="w-7 h-7" />,
+    icon: <GrNotification className="w-6 h-6" />,
     active: false,
   },
   {
     title: "Messages",
-    icon: <AiOutlineMail className="w-7 h-7" />,
+    icon: <AiOutlineMail className="w-6 h-6" />,
     active: false,
   },
   {
     title: "Profile",
-    icon: <RiUserLine className="w-7 h-7" />,
+    icon: <RiUserLine className="w-6 h-6" />,
     active: false,
   },
 ];
