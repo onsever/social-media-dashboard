@@ -102,7 +102,7 @@ export default function PostItem({ post, user }: PostItemProps) {
             {isEditMode ? (
               <form>
                 <textarea
-                  className="w-full h-32 p-2 rounded-lg border-none focus:outline-none text-xl resize-none"
+                  className="w-full h-32 p-2 rounded-lg border-none focus:outline-none resize-none"
                   value={post.content}
                   onChange={(e) => handleEditPost(e, post.id)}
                   onKeyDown={(e) => {
