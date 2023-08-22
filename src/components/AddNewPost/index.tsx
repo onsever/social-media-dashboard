@@ -7,9 +7,10 @@ import { useDispatch } from "react-redux";
 
 interface AddNewPostProps {
   user: UserState;
+  onSubmit?: () => void;
 }
 
-export default function AddNewPost({ user }: AddNewPostProps) {
+export default function AddNewPost({ user, onSubmit }: AddNewPostProps) {
   const dispatch = useDispatch();
 
   const [textAreaValue, setTextAreaValue] = React.useState<string>("");
@@ -35,6 +36,7 @@ export default function AddNewPost({ user }: AddNewPostProps) {
     );
 
     setTextAreaValue("");
+    onSubmit && onSubmit();
   };
 
   React.useEffect(() => {
