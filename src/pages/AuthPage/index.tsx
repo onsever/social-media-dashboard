@@ -1,15 +1,17 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { authReducer, initialState } from "./reducer.ts";
 import { setAuthenticated } from "../../redux/features/auth/authSlice.ts";
 import { createOrUpdateUser } from "../../redux/features/user/userSlice.ts";
 import { Button, Input, Logo } from "../../components";
+import { RootState } from "../../redux/store.ts";
 
 export default function AuthPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [state, dispatchState] = React.useReducer(authReducer, initialState);
+  const auth = useSelector((state: RootState) => state.auth);
 
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -78,6 +80,12 @@ export default function AuthPage() {
   React.useEffect(() => {
     dispatchState({ type: "RESET_FIELDS" });
   }, [state.isLogin]);
+
+  React.useEffect(() => {
+    if (auth.isAuthenticated) {
+      navigate("/home");
+    }
+  }, [auth, navigate]);
 
   return (
     <div className="grid grid-cols-2 h-screen w-full">
