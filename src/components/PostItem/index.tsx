@@ -61,7 +61,7 @@ export default function PostItem({ post, user }: PostItemProps) {
   };
 
   return (
-    <div className="px-4 pt-4 flex border-b border-b-gray-100 pb-4 hover:bg-gray-50 cursor-pointer">
+    <div className="px-4 pt-4 flex border-b border-b-gray-100 pb-2 hover:bg-gray-50 cursor-pointer">
       <div>
         <UserAvatarCircle user={user} />
       </div>
