@@ -1,6 +1,5 @@
 import { createBrowserRouter, Outlet, RouteObject } from "react-router-dom";
-import HomePage from "../pages/HomePage";
-import AuthPage from "../pages/AuthPage";
+import { HomePage, AuthPage, PostPage } from "../pages";
 import ProtectedRoute from "./ProtectedRoute";
 import { Layout } from "../components";
 
@@ -18,6 +17,14 @@ const routes: RouteObject[] = [
         element: (
           <ProtectedRoute>
             <HomePage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/home/post/:id",
+        element: (
+          <ProtectedRoute>
+            <PostPage />
           </ProtectedRoute>
         ),
       },
