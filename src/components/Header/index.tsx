@@ -9,6 +9,7 @@ import { RootState } from "../../redux/store.ts";
 import UserAvatarCircle from "../UserAvatarCircle";
 import { setAuthenticated } from "../../redux/features/auth/authSlice.ts";
 import Modal from "../Modal";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -33,19 +34,20 @@ export default function Header() {
   return (
     <>
       <header className="p-2 py-3 relative">
-        <Logo width={8} height={8} />
+        <Link to={`/home`}>
+          <Logo width={8} height={8} />
+        </Link>
         <nav className="flex items-center justify-start my-6 space-x-4">
           <ul className="flex flex-col items-start justify-start space-y-8">
             {navLinks.map((link) => (
-              <li
-                key={link.title}
-                className="flex items-center justify-center space-x-5 hover:bg-gray-200 rounded-full cursor-pointer"
-              >
-                {link.icon}
-                <span className={`text-lg ${link.active && "font-bold"}`}>
-                  {link.title}
-                </span>
-              </li>
+              <Link to={link.path} key={link.path}>
+                <li className="flex items-center justify-center space-x-5 hover:bg-gray-200 rounded-full cursor-pointer">
+                  {link.icon}
+                  <span className={`text-lg ${link.active && "font-bold"}`}>
+                    {link.title}
+                  </span>
+                </li>
+              </Link>
             ))}
           </ul>
         </nav>

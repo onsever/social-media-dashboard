@@ -12,6 +12,7 @@ import {
   createOrUpdatePost,
 } from "../../redux/features/post/postSlice.ts";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 interface PostItemProps {
   post: PostState;
@@ -68,7 +69,9 @@ export default function PostItem({ post, user }: PostItemProps) {
         <div className="ml-4">
           <div className="flex justify-between">
             <div className="flex items-center">
-              <span className="font-bold">{user.fullName}</span>
+              <Link to={`/home/post/${post.id}`}>
+                <span className="font-bold">{user.fullName}</span>
+              </Link>
               <span className="text-gray-500 ml-1">@{user.username}</span>
               <span className="text-gray-500 ml-1">·</span>
               <span className="text-gray-500 ml-1">1h</span>
